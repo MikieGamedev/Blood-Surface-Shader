@@ -1,7 +1,10 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.ProBuilder;
+
+
+// Assign this script to a blood particle that you want to splatter.
+// Create a particle system in the scene you want blood to spray, call it Splatter Part (Specifically)
+// Make Splatter part have a max particles of 100,000 with no emmission.
 
 public class BloodCollisionEmitter : MonoBehaviour
 {
@@ -18,12 +21,6 @@ public class BloodCollisionEmitter : MonoBehaviour
     {
         splatterParticleSystem = GameObject.Find("Splatter Part").GetComponent<ParticleSystem>();
         mainParticleSystem = GetComponent<ParticleSystem>();
-
-        if (TogglePref.GetValue("screen blood", true) && PlayerController.localPlayer.gameplayCamera != null)
-            if (Vector3.Distance(transform.position, PlayerController.localPlayer.gameplayCamera.transform.position) < 6f)
-            {
-                HealthIndicator.Instance.AddBloodToScreen((5, 8), Random.Range(0, 150) < percentageChance ? 1 : 0);
-            }
     }
 
     private void Update()
@@ -68,3 +65,4 @@ public class BloodCollisionEmitter : MonoBehaviour
         }
     }
 }
+
